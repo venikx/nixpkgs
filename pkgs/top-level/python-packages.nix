@@ -1928,6 +1928,7 @@ in {
   cryptography = callPackage ../development/python-modules/cryptography {
     inherit (pkgs.darwin) libiconv;
     inherit (pkgs.darwin.apple_sdk.frameworks) Security;
+    openssl = pkgs.openssl_1_1;
   };
 
   crytic-compile = callPackage ../development/python-modules/crytic-compile { };
