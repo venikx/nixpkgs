@@ -120,5 +120,7 @@ in buildBazelPackage rec {
     license = licenses.asl20;
     maintainers = with maintainers; [ andrew-d ];
     platforms = [ "x86_64-linux" ];
+    # the version we have right now does not compile with go 1.17
+    broken = true;
   };
 }
