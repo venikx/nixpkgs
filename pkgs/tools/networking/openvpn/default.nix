@@ -6,6 +6,7 @@
 , iproute2
 , lzo
 , openssl
+, openssl_1_1
 , pam
 , useSystemd ? stdenv.isLinux
 , systemd
@@ -22,7 +23,7 @@ let
     sha256 = "021qzv1k0zxgv1rmyfpqj3zlzqr28xa7zff1n7vrbjk36ijylpsc";
   };
 
-  generic = { version, sha256 }:
+  generic = { version, sha256, extraBuildInputs ? [] }:
     let
       withIpRoute = stdenv.isLinux && (versionOlder version "2.5.4");
     in
@@ -38,11 +39,12 @@ let
 
         nativeBuildInputs = [ makeWrapper pkg-config ];
 
-        buildInputs = [ lzo openssl ]
+        buildInputs = [ lzo ]
           ++ optional stdenv.isLinux pam
           ++ optional withIpRoute iproute2
           ++ optional useSystemd systemd
-          ++ optional pkcs11Support pkcs11helper;
+          ++ optional pkcs11Support pkcs11helper
+          ++ extraBuildInputs;
 
         configureFlags = optionals withIpRoute [
           "--enable-iproute2"
@@ -80,10 +82,12 @@ in
   openvpn_24 = generic {
     version = "2.4.12";
     sha256 = "1vjx82nlkxrgzfiwvmmlnz8ids5m2fiqz7scy1smh3j9jnf2v5b6";
+    extraBuildInputs = [ openssl_1_1 ];
   };
 
   openvpn = generic {
     version = "2.5.6";
     sha256 = "0gdd88rcan9vfiwkzsqn6fxxdim7kb1bsxrcra59c5xksprpwfik";
+    extraBuildInputs = [ openssl ];
   };
 }
