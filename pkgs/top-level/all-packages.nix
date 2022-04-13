@@ -8493,9 +8493,7 @@ with pkgs;
 
   obexd = callPackage ../tools/bluetooth/obexd { };
 
-  obfs4 = callPackage ../tools/networking/obfs4 {
-    buildGoModule = buildGo116Module;
-  };
+  obfs4 = callPackage ../tools/networking/obfs4 { };
 
   oci-image-tool = callPackage ../tools/misc/oci-image-tool { };
 
