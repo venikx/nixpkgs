@@ -22203,9 +22203,7 @@ with pkgs;
 
   urserver = callPackage ../servers/urserver { };
 
-  vouch-proxy = callPackage ../servers/vouch-proxy {
-    buildGoModule = buildGo116Module;
-  };
+  vouch-proxy = callPackage ../servers/vouch-proxy { };
 
   victoriametrics = callPackage ../servers/nosql/victoriametrics { };
 
