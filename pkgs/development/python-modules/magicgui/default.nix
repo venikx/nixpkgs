@@ -9,9 +9,13 @@
 , pyside2
 , psygnal
 , docstring-parser
-}: buildPythonPackage rec {
+}:
+
+buildPythonPackage rec {
   pname = "magicgui";
   version = "0.3.7";
+  format = "pyproject";
+
   src = fetchFromGitHub {
     owner = "napari";
     repo = "magicgui";
